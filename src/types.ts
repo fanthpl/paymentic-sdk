@@ -109,11 +109,13 @@ export interface PaymenticCreateTransactionRequest {
 }
 
 export interface PaymenticCreateTransactionResponse {
-    /** Transaction ID */
-    id: string;
-    /** Transaction URL */
-    redirectUrl: string;
-    whitelabel?: object | null;
+    data: {
+        /** Transaction ID */
+        id: string;
+        /** Transaction URL */
+        redirectUrl: string;
+        whitelabel?: object | null;
+    };
 }
 
 interface PaymenticWebhookEnvelope {
