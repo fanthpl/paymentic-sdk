@@ -1,6 +1,6 @@
 {
     "name": "@fanth/paymentic-sdk",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "TypeScript SDK for the Paymentic REST API",
     "type": "module",
     "sideEffects": false,
@@ -38,7 +38,7 @@
         "dev": "tsx .",
         "test": "tsx src/client.test.ts"
     },
-    "license": "ISC",
+    "license": "MIT",
     "devDependencies": {
         "@types/node": "^26.1.1",
         "cross-env": "^10.1.0",
