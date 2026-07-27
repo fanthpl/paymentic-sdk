@@ -132,5 +132,4 @@ dist
 !.idea/prettier.xml
 .playwright-mcp/
 .claude/settings.local.json
-payu-api-ref.yaml
-src/testing.ts
+docs-payment-api.json

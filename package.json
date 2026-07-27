@@ -1,6 +1,6 @@
 {
     "name": "@fanth/paymentic-sdk",
-    "version": "0.1.2",
+    "version": "0.1.0",
     "description": "TypeScript SDK for the Paymentic REST API",
     "type": "module",
     "sideEffects": false,
@@ -36,7 +36,7 @@
         "prepublishOnly": "pnpm build",
         "prod": "cross-env NODE_ENV=production tsx .",
         "dev": "tsx .",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "tsx src/client.test.ts"
     },
     "license": "ISC",
     "devDependencies": {
