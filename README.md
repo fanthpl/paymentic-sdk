@@ -1,6 +1,6 @@
 # @fanth/paymentic-sdk
 
-TypeScript SDK for the [Paymentic REST API](https://docs.paymentic.com/api/v1.2/payment-api/paymentic-payment-api).
+TypeScript SDK for the [Paymentic REST API](https://docs.paymentic.com/api/v1.2/payment-api/paymentic-payment-api) ([docs](https://docs.paymentic.com/docs/intro)).
 
 ## Install
 
