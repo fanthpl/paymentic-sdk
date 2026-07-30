@@ -29,7 +29,7 @@ const client = new PaymenticClient({
 });
 
 const transaction = await client.createTransaction({
-    amount: "1000",
+    amount: "10.00",
     currency: "PLN",
     title: "Order #1",
 });
