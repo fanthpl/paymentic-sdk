@@ -1,6 +1,6 @@
 {
     "name": "@fanth/paymentic-sdk",
-    "version": "0.1.6",
+    "version": "0.1.7",
     "description": "TypeScript SDK for the Paymentic REST API",
     "type": "module",
     "sideEffects": false,
