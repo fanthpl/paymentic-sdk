@@ -35,7 +35,7 @@ export class PaymenticClient {
         this.api.interceptors.response.use(
             (response) => response,
             (error: AxiosError) => {
-                console.error({ message: "Paymentic API error", errorResponse: error.response?.data });
+                console.error({ message: "Paymentic API error", errorResponse: JSON.stringify(error.response?.data) });
                 throw error;
             }
         );
