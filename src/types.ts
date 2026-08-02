@@ -1,3 +1,5 @@
+export type PaymentMethod = "BLIK" | "PBL" | "CARD" | "MW" | "PAYSAFE" | "PAYPAL" | "BNPL" | (string & {});
+
 export interface PaymenticCreateTransactionRequest {
     /** Amount in minor precision with up to 2 decimals */
     amount: string;
@@ -77,7 +79,7 @@ export interface PaymenticCreateTransactionRequest {
               sku?: string | null;
           }[]
         | null;
-    paymentMethod?: "BLIK" | "PBL" | "BNPL" | "CARD" | "MOBILE_WALLET" | null;
+    paymentMethod?: PaymentMethod | null;
     paymentChannel?: string | null;
     /**
      * Whitelist of payment methods (optionally narrowed to a specific channel) that the gateway will present to the customer.
@@ -86,7 +88,7 @@ export interface PaymenticCreateTransactionRequest {
      */
     allowedPaymentMethods?:
         | {
-              paymentMethod: "BLIK" | "PBL" | "BNPL" | "CARD" | "MW" | "PAYSAFE";
+              paymentMethod: PaymentMethod;
               paymentChannel?: string | null;
           }[]
         | null;
@@ -97,7 +99,7 @@ export interface PaymenticCreateTransactionRequest {
      */
     hiddenPaymentMethods?:
         | {
-              paymentMethod: "BLIK" | "PBL" | "BNPL" | "CARD" | "MW" | "PAYSAFE";
+              paymentMethod: PaymentMethod;
               paymentChannel?: string | null;
           }[]
         | null;
@@ -118,6 +120,58 @@ export interface PaymenticCreateTransactionResponse {
     };
 }
 
+export interface PaymenticGetPointChannelsResponse {
+    data: {
+        /** Channel ID, e.g. "mbank" */
+        id: string;
+        /** Whether the channel is available for use */
+        available: boolean;
+        method: PaymentMethod;
+        name: string;
+        image: {
+            default?: string | null;
+        };
+        /** Minimum and maximum transaction amount */
+        amount: {
+            minimum: string;
+            maximum: string;
+        };
+        aliases?: string[] | null;
+        /** ISO 4217 3-letter currency codes */
+        currencies: string[];
+        commission: {
+            value?: string | null;
+            minimum?: string | null;
+            /** Whether commission is fixed */
+            fixed?: string | null;
+        };
+        authorization: {
+            type: ("REDIRECT" | "MULTI_FACTOR" | "SCAN_CODE" | "APP_NOTIFICATION")[];
+        };
+        paymentType: "INSTANT" | "PRE_AUTHORIZATION" | "OFFLINE";
+        compliance?:
+            | {
+                  id: string;
+                  type: "DISPLAYABLE" | "ACCEPTABLE";
+                  required: boolean;
+                  checked?: boolean | null;
+                  content: {
+                      text?: string;
+                      html?: string;
+                      markdown?: string;
+                  };
+                  links: {
+                      id: string;
+                      label: string;
+                      url: string;
+                  }[];
+              }[]
+            | null;
+        enablingAt?: string | null;
+        disablingAt?: string | null;
+    }[];
+}
+
 interface PaymenticWebhookEnvelope {
     /** From the X-Paymentic-Notification-Id header, use for idempotency */
     notificationId: string;
@@ -134,7 +188,7 @@ export interface PaymenticTransactionStatusChangedNotification extends Paymentic
     currency: "PLN" | "EUR";
     commission?: string | null;
     externalReferenceId?: string | null;
-    paymentMethod?: "BLIK" | "PBL" | "BNPL" | "CARD" | "MOBILE_WALLET" | null;
+    paymentMethod?: PaymentMethod | null;
     paymentChannel?: string | null;
 }
 

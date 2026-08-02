@@ -3,6 +3,7 @@ import crypto from "crypto";
 import type {
     PaymenticCreateTransactionRequest,
     PaymenticCreateTransactionResponse,
+    PaymenticGetPointChannelsResponse,
     PaymenticWebhookEvent,
     PaymenticWebhookNotification,
 } from "./types.js";
@@ -46,6 +47,12 @@ export class PaymenticClient {
             `/payment/points/${this.config.pointId}/transactions`,
             body
         );
+        return response.data;
+    }
+
+    /** Lists payment channels available for the configured point. */
+    async getPointChannels(): Promise<PaymenticGetPointChannelsResponse> {
+        const response = await this.api.get<PaymenticGetPointChannelsResponse>(`/payment/points/${this.config.pointId}/channels`);
         return response.data;
     }
 
