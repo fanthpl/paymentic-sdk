@@ -172,6 +172,46 @@ export interface PaymenticGetPointChannelsResponse {
     }[];
 }
 
+export interface PaymenticGetTransactionDetailsResponse {
+    data: {
+        /** Transaction ID */
+        id: string;
+        status: "CREATED" | "PENDING" | "PAID" | "FAILED" | "EXPIRED";
+        /** Transaction amount as a string-encoded decimal */
+        amount: string;
+        /** ISO 4217 3-letter currency code */
+        currency: string;
+        title: string;
+        commission?: string | null;
+        description?: string | null;
+        customer: PaymenticCreateTransactionRequest["customer"];
+        order: PaymenticCreateTransactionRequest["order"];
+        billingAddress?: PaymenticCreateTransactionRequest["billingAddress"];
+        shippingAddress?: PaymenticCreateTransactionRequest["shippingAddress"];
+        externalReferenceId?: string | null;
+        redirect: {
+            success?: string | null;
+            failure?: string | null;
+        };
+        paymentMethod?: PaymentMethod | null;
+        paymentChannel?: string | null;
+        whitelabel: boolean;
+        cart?:
+            | {
+                  name?: string | null;
+                  quantity?: number | null;
+                  unitPrice?: string | null;
+              }[]
+            | null;
+        autoCapture: boolean;
+        isCaptured: boolean;
+        capturedAt?: string | null;
+        paidAt?: string | null;
+        createdAt?: string | null;
+        expiresAt?: string | null;
+    };
+}
+
 interface PaymenticWebhookEnvelope {
     /** From the X-Paymentic-Notification-Id header, use for idempotency */
     notificationId: string;

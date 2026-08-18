@@ -4,6 +4,7 @@ import type {
     PaymenticCreateTransactionRequest,
     PaymenticCreateTransactionResponse,
     PaymenticGetPointChannelsResponse,
+    PaymenticGetTransactionDetailsResponse,
     PaymenticWebhookEvent,
     PaymenticWebhookNotification,
 } from "./types.js";
@@ -46,6 +47,14 @@ export class PaymenticClient {
         const response = await this.api.post<PaymenticCreateTransactionResponse>(
             `/payment/points/${this.config.pointId}/transactions`,
             body
+        );
+        return response.data;
+    }
+
+    /** Fetches details of a single transaction. */
+    async getTransaction(transactionId: string): Promise<PaymenticGetTransactionDetailsResponse> {
+        const response = await this.api.get<PaymenticGetTransactionDetailsResponse>(
+            `/payment/points/${this.config.pointId}/transactions/${transactionId}`
         );
         return response.data;
     }
